@@ -6,6 +6,10 @@ SafeShell is an AI-assisted Linux command safety prototype that analyzes command
 
 > **Core safety principle:** Semantic AI can provide additional context, but deterministic rules establish the safety floor and should never be overridden by an AI prediction.
 
+Built for C-DAC Hackathons 2026 — Track: OS + AI/ML
+
+This repository also contains a structured SafeShell scaffold under the [SafeShell](SafeShell) directory for a modular implementation of the command-safety architecture.
+
 ---
 
 ## 🌟 Key Features
