@@ -1,0 +1,791 @@
+[
+  {
+    "command": "rm",
+    "category": "fs",
+    "known_risk": "critical",
+    "protected_paths": [
+      "/",
+      "/boot",
+      "/bin",
+      "/sbin",
+      "/etc",
+      "/usr",
+      "/var",
+      "/home",
+      "/lib",
+      "/lib64",
+      "/dev",
+      "/proc",
+      "/sys",
+      "/root",
+      "/tmp"
+    ],
+    "flags": [
+      {
+        "flag": "-r",
+        "description": "Remove directories and their contents recursively",
+        "danger_weight": 8
+      },
+      {
+        "flag": "-R",
+        "description": "Remove directories and their contents recursively (alias for -r)",
+        "danger_weight": 8
+      },
+      {
+        "flag": "--recursive",
+        "description": "Remove directories and their contents recursively (long form)",
+        "danger_weight": 8
+      },
+      {
+        "flag": "-f",
+        "description": "Force removal without prompting, ignore nonexistent files",
+        "danger_weight": 7
+      },
+      {
+        "flag": "--force",
+        "description": "Force removal without prompting (long form)",
+        "danger_weight": 7
+      },
+      {
+        "flag": "--no-preserve-root",
+        "description": "Do not treat '/' specially, allows recursive deletion of root filesystem",
+        "danger_weight": 10
+      },
+      {
+        "flag": "-d",
+        "description": "Remove empty directories",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-i",
+        "description": "Prompt before every removal (safety flag)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-I",
+        "description": "Prompt once before removing more than three files or recursing",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-v",
+        "description": "Explain what is being done (verbose)",
+        "danger_weight": 0
+      }
+    ]
+  },
+  {
+    "command": "dd",
+    "category": "fs",
+    "known_risk": "critical",
+    "protected_paths": [
+      "/dev/sda",
+      "/dev/sdb",
+      "/dev/sdc",
+      "/dev/nvme0n1",
+      "/dev/nvme1n1",
+      "/dev/vda",
+      "/dev/xvda",
+      "/dev/mmcblk0"
+    ],
+    "flags": [
+      {
+        "flag": "of=",
+        "description": "Output file — writes raw data to the target; can overwrite entire disks or partitions without warning",
+        "danger_weight": 9
+      },
+      {
+        "flag": "if=/dev/zero",
+        "description": "Reads zeroes as input — used with of= to wipe a device or file completely",
+        "danger_weight": 8
+      },
+      {
+        "flag": "if=/dev/urandom",
+        "description": "Reads random data as input — used with of= to securely wipe a device",
+        "danger_weight": 8
+      },
+      {
+        "flag": "if=/dev/random",
+        "description": "Reads random data as input — used with of= to overwrite a device",
+        "danger_weight": 8
+      },
+      {
+        "flag": "bs=",
+        "description": "Block size — large values accelerate destructive writes",
+        "danger_weight": 3
+      },
+      {
+        "flag": "count=",
+        "description": "Number of blocks to copy — omitting this copies the entire input",
+        "danger_weight": 2
+      },
+      {
+        "flag": "conv=noerror",
+        "description": "Continue after read errors — can mask data corruption",
+        "danger_weight": 4
+      },
+      {
+        "flag": "seek=",
+        "description": "Skip blocks at start of output — can overwrite data at arbitrary offsets",
+        "danger_weight": 5
+      },
+      {
+        "flag": "status=none",
+        "description": "Suppress all informational output — destructive operations run silently",
+        "danger_weight": 3
+      }
+    ]
+  },
+  {
+    "command": "chmod",
+    "category": "fs",
+    "known_risk": "high",
+    "protected_paths": [
+      "/",
+      "/etc",
+      "/etc/shadow",
+      "/etc/passwd",
+      "/etc/sudoers",
+      "/usr",
+      "/bin",
+      "/sbin",
+      "/boot",
+      "/var"
+    ],
+    "flags": [
+      {
+        "flag": "-R",
+        "description": "Change file mode bits recursively through directory trees",
+        "danger_weight": 7
+      },
+      {
+        "flag": "--recursive",
+        "description": "Change file mode bits recursively (long form)",
+        "danger_weight": 7
+      },
+      {
+        "flag": "777",
+        "description": "Sets read/write/execute for owner, group, and others — world-writable",
+        "danger_weight": 8
+      },
+      {
+        "flag": "666",
+        "description": "Sets read/write for everyone — world-writable files",
+        "danger_weight": 7
+      },
+      {
+        "flag": "+s",
+        "description": "Set SUID/SGID bit — executable runs with file owner's privileges",
+        "danger_weight": 9
+      },
+      {
+        "flag": "u+s",
+        "description": "Set SUID bit — executable runs as the file owner (often root)",
+        "danger_weight": 9
+      },
+      {
+        "flag": "g+s",
+        "description": "Set SGID bit — executable runs with file group's privileges",
+        "danger_weight": 8
+      },
+      {
+        "flag": "o+w",
+        "description": "Add write permission for others — allows any user to modify the file",
+        "danger_weight": 6
+      },
+      {
+        "flag": "a+x",
+        "description": "Add execute permission for all users",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--no-preserve-root",
+        "description": "Do not treat '/' specially when operating recursively",
+        "danger_weight": 9
+      },
+      {
+        "flag": "000",
+        "description": "Remove all permissions — can lock out access to critical files",
+        "danger_weight": 7
+      }
+    ]
+  },
+  {
+    "command": "chown",
+    "category": "fs",
+    "known_risk": "high",
+    "protected_paths": [
+      "/",
+      "/etc",
+      "/etc/shadow",
+      "/etc/passwd",
+      "/etc/sudoers",
+      "/usr",
+      "/bin",
+      "/sbin",
+      "/boot",
+      "/var",
+      "/home"
+    ],
+    "flags": [
+      {
+        "flag": "-R",
+        "description": "Change ownership recursively through directory trees",
+        "danger_weight": 7
+      },
+      {
+        "flag": "--recursive",
+        "description": "Change ownership recursively (long form)",
+        "danger_weight": 7
+      },
+      {
+        "flag": "--no-preserve-root",
+        "description": "Do not treat '/' specially when operating recursively",
+        "danger_weight": 9
+      },
+      {
+        "flag": "--from",
+        "description": "Change owner/group only if current owner/group matches — safer conditional change",
+        "danger_weight": 1
+      },
+      {
+        "flag": "-h",
+        "description": "Affect symbolic links instead of referenced files",
+        "danger_weight": 3
+      },
+      {
+        "flag": "--dereference",
+        "description": "Affect the referent of each symlink rather than the symlink itself",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-v",
+        "description": "Output a diagnostic for every file processed (verbose)",
+        "danger_weight": 0
+      }
+    ]
+  },
+  {
+    "command": "mkfs",
+    "category": "fs",
+    "known_risk": "critical",
+    "protected_paths": [
+      "/dev/sda",
+      "/dev/sda1",
+      "/dev/sda2",
+      "/dev/sdb",
+      "/dev/nvme0n1",
+      "/dev/nvme0n1p1",
+      "/dev/nvme0n1p2",
+      "/dev/vda",
+      "/dev/xvda",
+      "/dev/mmcblk0"
+    ],
+    "flags": [
+      {
+        "flag": "-F",
+        "description": "Force filesystem creation even if device appears to contain an existing filesystem (ext2/3/4)",
+        "danger_weight": 10
+      },
+      {
+        "flag": "--force",
+        "description": "Force creation — overrides safety checks on the target device",
+        "danger_weight": 10
+      },
+      {
+        "flag": "-f",
+        "description": "Force overwrite of existing filesystem (XFS)",
+        "danger_weight": 10
+      },
+      {
+        "flag": "-L",
+        "description": "Set filesystem label — benign on its own",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-t",
+        "description": "Specify filesystem type (ext4, xfs, btrfs, etc.)",
+        "danger_weight": 1
+      },
+      {
+        "flag": "-n",
+        "description": "Dry-run / do not actually create filesystem (safety flag, not all mkfs variants)",
+        "danger_weight": 0
+      }
+    ]
+  },
+  {
+    "command": "kill",
+    "category": "process",
+    "known_risk": "medium",
+    "flags": [
+      {
+        "flag": "-9",
+        "description": "Send SIGKILL — forcefully terminate process with no chance for cleanup",
+        "danger_weight": 7
+      },
+      {
+        "flag": "-SIGKILL",
+        "description": "Send SIGKILL — forcefully terminate process (named form)",
+        "danger_weight": 7
+      },
+      {
+        "flag": "-KILL",
+        "description": "Send SIGKILL — forcefully terminate process (short named form)",
+        "danger_weight": 7
+      },
+      {
+        "flag": "-1",
+        "description": "When used as PID: send signal to all processes the user can signal — can terminate entire session",
+        "danger_weight": 9
+      },
+      {
+        "flag": "-SIGHUP",
+        "description": "Send SIGHUP — can restart or terminate daemons",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-SIGSTOP",
+        "description": "Send SIGSTOP — freeze process, cannot be caught or ignored",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-SIGTERM",
+        "description": "Send SIGTERM — request graceful termination (default signal)",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-s",
+        "description": "Specify signal to send by name or number",
+        "danger_weight": 2
+      }
+    ]
+  },
+  {
+    "command": "sudo",
+    "category": "system",
+    "known_risk": "high",
+    "flags": [
+      {
+        "flag": "-i",
+        "description": "Simulate initial login — run a root login shell with root's environment",
+        "danger_weight": 6
+      },
+      {
+        "flag": "-s",
+        "description": "Run a shell as the target user (default: root)",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-u",
+        "description": "Run command as a specified user instead of root",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-E",
+        "description": "Preserve user environment when running command — can expose env vars to privileged process",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--preserve-env",
+        "description": "Preserve user environment (long form)",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-n",
+        "description": "Non-interactive mode — do not prompt for password; fail if password is required",
+        "danger_weight": 2
+      },
+      {
+        "flag": "-l",
+        "description": "List allowed commands for the user (safe/informational)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-k",
+        "description": "Invalidate cached credentials — forces password prompt on next sudo",
+        "danger_weight": 0
+      },
+      {
+        "flag": "su",
+        "description": "Switch to root user with full interactive shell",
+        "danger_weight": 6
+      }
+    ]
+  },
+  {
+    "command": "curl",
+    "category": "network",
+    "known_risk": "medium",
+    "flags": [
+      {
+        "flag": "-o",
+        "description": "Write output to file — can overwrite existing files",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-O",
+        "description": "Write output to file using remote filename — relies on untrusted server for filename",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-k",
+        "description": "Allow insecure TLS connections — disables certificate verification, enables MITM attacks",
+        "danger_weight": 6
+      },
+      {
+        "flag": "--insecure",
+        "description": "Allow insecure TLS connections (long form)",
+        "danger_weight": 6
+      },
+      {
+        "flag": "-X DELETE",
+        "description": "Send HTTP DELETE request — can delete remote resources",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-X PUT",
+        "description": "Send HTTP PUT request — can overwrite remote resources",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-d",
+        "description": "Send POST data — could transmit sensitive data to untrusted endpoints",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-u",
+        "description": "Specify user:password for authentication — credentials may be exposed in shell history",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-H",
+        "description": "Add custom header — can inject authorization tokens or override security headers",
+        "danger_weight": 3
+      },
+      {
+        "flag": "--upload-file",
+        "description": "Upload a local file to the server",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-L",
+        "description": "Follow redirects — may redirect to malicious endpoint",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-s",
+        "description": "Silent mode — suppresses progress and errors, masking failures",
+        "danger_weight": 2
+      }
+    ]
+  },
+  {
+    "command": "wget",
+    "category": "network",
+    "known_risk": "medium",
+    "flags": [
+      {
+        "flag": "-O",
+        "description": "Write downloaded content to specified file — can overwrite existing files",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--no-check-certificate",
+        "description": "Skip TLS certificate validation — vulnerable to MITM attacks",
+        "danger_weight": 6
+      },
+      {
+        "flag": "-r",
+        "description": "Recursive download — can mirror entire websites, high bandwidth and disk usage",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--recursive",
+        "description": "Recursive download (long form)",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--mirror",
+        "description": "Mirror an entire website with timestamps and recursion",
+        "danger_weight": 5
+      },
+      {
+        "flag": "--execute",
+        "description": "Execute a .wgetrc command — can override safety settings",
+        "danger_weight": 6
+      },
+      {
+        "flag": "-q",
+        "description": "Quiet mode — suppresses output, masking errors or malicious downloads",
+        "danger_weight": 2
+      },
+      {
+        "flag": "--user",
+        "description": "Specify HTTP username — credentials may be exposed in process listing",
+        "danger_weight": 4
+      },
+      {
+        "flag": "--password",
+        "description": "Specify HTTP password — credentials exposed in process listing and shell history",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-P",
+        "description": "Set directory prefix for downloads — could write files to unintended locations",
+        "danger_weight": 3
+      }
+    ]
+  },
+  {
+    "command": "git",
+    "category": "system",
+    "known_risk": "low",
+    "flags": [
+      {
+        "flag": "clean -f",
+        "description": "Remove untracked files from working tree forcefully",
+        "danger_weight": 5
+      },
+      {
+        "flag": "clean -fd",
+        "description": "Remove untracked files and directories forcefully",
+        "danger_weight": 6
+      },
+      {
+        "flag": "clean -fdx",
+        "description": "Remove untracked files, directories, and ignored files — destroys build artifacts and local config",
+        "danger_weight": 7
+      },
+      {
+        "flag": "reset --hard",
+        "description": "Reset working tree and index to HEAD — discards all uncommitted changes permanently",
+        "danger_weight": 6
+      },
+      {
+        "flag": "push --force",
+        "description": "Force-push to remote — overwrites remote history, can destroy team members' work",
+        "danger_weight": 8
+      },
+      {
+        "flag": "push -f",
+        "description": "Force-push to remote (short form)",
+        "danger_weight": 8
+      },
+      {
+        "flag": "checkout -- .",
+        "description": "Discard all working tree changes in the current directory",
+        "danger_weight": 5
+      },
+      {
+        "flag": "rebase -i",
+        "description": "Interactive rebase — rewrites commit history; dangerous if pushed to shared branches",
+        "danger_weight": 5
+      },
+      {
+        "flag": "filter-branch",
+        "description": "Rewrite branch history — destructive operation on repository history",
+        "danger_weight": 7
+      },
+      {
+        "flag": "reflog expire --all",
+        "description": "Expire all reflog entries — makes lost commits unrecoverable",
+        "danger_weight": 8
+      }
+    ]
+  },
+  {
+    "command": "find",
+    "category": "fs",
+    "known_risk": "medium",
+    "protected_paths": [
+      "/",
+      "/boot",
+      "/bin",
+      "/sbin",
+      "/etc",
+      "/usr",
+      "/var",
+      "/lib",
+      "/lib64",
+      "/dev",
+      "/proc",
+      "/sys"
+    ],
+    "flags": [
+      {
+        "flag": "-delete",
+        "description": "Delete matching files — irreversible; especially dangerous with broad match patterns",
+        "danger_weight": 8
+      },
+      {
+        "flag": "-exec",
+        "description": "Execute an arbitrary command on each matched file — danger depends on the command",
+        "danger_weight": 6
+      },
+      {
+        "flag": "-exec rm",
+        "description": "Execute rm on each matched file — mass deletion",
+        "danger_weight": 9
+      },
+      {
+        "flag": "-exec chmod",
+        "description": "Execute chmod on each matched file — mass permission change",
+        "danger_weight": 7
+      },
+      {
+        "flag": "-exec chown",
+        "description": "Execute chown on each matched file — mass ownership change",
+        "danger_weight": 7
+      },
+      {
+        "flag": "-execdir",
+        "description": "Execute command from the directory containing the match — slightly safer than -exec",
+        "danger_weight": 5
+      },
+      {
+        "flag": "-ok",
+        "description": "Like -exec but prompts for confirmation (safety flag)",
+        "danger_weight": 1
+      },
+      {
+        "flag": "-maxdepth 0",
+        "description": "Only apply tests/actions to the starting points — limits scope (safety modifier)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-mindepth",
+        "description": "Do not apply tests/actions at levels less than specified",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-prune",
+        "description": "Do not descend into matched directories — useful for excluding paths (safety modifier)",
+        "danger_weight": 0
+      }
+    ]
+  },
+  {
+    "command": "xargs",
+    "category": "system",
+    "known_risk": "medium",
+    "flags": [
+      {
+        "flag": "rm",
+        "description": "When used as the command argument — mass deletion driven by piped input",
+        "danger_weight": 8
+      },
+      {
+        "flag": "rm -rf",
+        "description": "When used as the command argument — recursive forced mass deletion from piped input",
+        "danger_weight": 10
+      },
+      {
+        "flag": "-I",
+        "description": "Replace occurrences of a placeholder with input — danger depends on the command invoked",
+        "danger_weight": 4
+      },
+      {
+        "flag": "-0",
+        "description": "Use null byte as delimiter — safer handling of filenames with spaces (safety modifier)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "--null",
+        "description": "Use null byte as delimiter (long form, safety modifier)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-r",
+        "description": "Do not run command if stdin is empty (GNU --no-run-if-empty, safety flag)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "--no-run-if-empty",
+        "description": "Do not run the command if there is no input (safety flag)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-P",
+        "description": "Run up to N parallel processes — amplifies impact of dangerous commands",
+        "danger_weight": 3
+      },
+      {
+        "flag": "-p",
+        "description": "Prompt the user before executing each command line (safety flag)",
+        "danger_weight": 0
+      },
+      {
+        "flag": "-t",
+        "description": "Print command line to stderr before executing (verbose/safety flag)",
+        "danger_weight": 0
+      }
+    ]
+  },
+  {
+    "command": "systemctl",
+    "category": "system",
+    "known_risk": "high",
+    "flags": [
+      {
+        "flag": "stop",
+        "description": "Stop a running service — can cause downtime for critical services (sshd, networking, etc.)",
+        "danger_weight": 6
+      },
+      {
+        "flag": "disable",
+        "description": "Prevent a service from starting at boot — service will not survive reboot",
+        "danger_weight": 7
+      },
+      {
+        "flag": "mask",
+        "description": "Completely prevent a service from being started even manually — stronger than disable",
+        "danger_weight": 8
+      },
+      {
+        "flag": "kill",
+        "description": "Send a signal to all processes in a service's cgroup",
+        "danger_weight": 6
+      },
+      {
+        "flag": "daemon-reload",
+        "description": "Reload systemd manager configuration — can affect running services if unit files are malformed",
+        "danger_weight": 4
+      },
+      {
+        "flag": "isolate",
+        "description": "Switch to a different target — stops all services not in the target; e.g., rescue.target kills most services",
+        "danger_weight": 9
+      },
+      {
+        "flag": "set-default",
+        "description": "Set the default boot target — changing to rescue.target or emergency.target affects next boot",
+        "danger_weight": 7
+      },
+      {
+        "flag": "reset-failed",
+        "description": "Reset the failed state of units — hides previous failures",
+        "danger_weight": 2
+      },
+      {
+        "flag": "start",
+        "description": "Start a service — generally safe but depends on the service",
+        "danger_weight": 2
+      },
+      {
+        "flag": "restart",
+        "description": "Restart a service — causes brief downtime",
+        "danger_weight": 4
+      },
+      {
+        "flag": "enable",
+        "description": "Enable a service to start at boot — generally intentional",
+        "danger_weight": 2
+      },
+      {
+        "flag": "status",
+        "description": "Show service status (read-only, safe)",
+        "danger_weight": 0
+      }
+    ]
+  }
+]
