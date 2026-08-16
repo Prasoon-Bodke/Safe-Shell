@@ -24,6 +24,7 @@ import knowledge_base
 import rules_engine
 import semantic_search
 
+from context.context_builder import build_context
 
 # ---------------------------------------------------------------------------
 # AST Construction & Parser Helper
@@ -197,6 +198,56 @@ def _suggest_alternative(cmd: str, flags: list[str], risk: str, rule: str) -> st
     return "Command parameters appear standard; verify target path before execution."
 
 
+
+
+def _apply_context_adjustment(
+    risk: str,
+    ast: dict,
+    context: dict
+) -> tuple[str, str]:
+    """
+    Adjust risk based on the current system context.
+
+    Existing deterministic rules remain the primary safety mechanism.
+    Context can only increase risk, never decrease it.
+    """
+
+    target_path = ast.get("target_path", "")
+
+    risk_levels = ["low", "medium", "high", "critical"]
+    current_index = risk_levels.index(risk)
+
+    context_reasons = []
+
+    # Check whether the target path exists in the current filesystem.
+    filesystem = context.get("filesystem", {})
+
+    if isinstance(filesystem, dict):
+        filesystem_text = str(filesystem).lower()
+
+        if target_path and target_path.lower() in filesystem_text:
+            context_reasons.append(
+                f"Target path '{target_path}' appears in the current filesystem context."
+            )
+
+    # Privileged commands receive additional scrutiny.
+    if ast.get("is_sudo"):
+        context_reasons.append(
+            "Command is being executed with elevated privileges."
+        )
+
+    # Never reduce an existing risk level.
+    if context_reasons and current_index < risk_levels.index("high"):
+        risk = "high"
+
+    if context_reasons:
+        reason = " ".join(context_reasons)
+    else:
+        reason = ""
+
+    return risk, reason
+
+
 # ---------------------------------------------------------------------------
 # Core Fusion Function
 # ---------------------------------------------------------------------------
@@ -235,6 +286,8 @@ def fuse(raw_command: str, ast: dict | None = None) -> dict[str, Any]:
         if not ast.get("raw"):
             ast["raw"] = raw_command
 
+    context = build_context()
+
     cmd_name = ast.get("command", "")
 
     # 1. Knowledge Base Lookup
@@ -253,6 +306,17 @@ def fuse(raw_command: str, ast: dict | None = None) -> dict[str, Any]:
     final_risk = rule_result.get("risk", "low")
     matched_rule = rule_result.get("matched_rule", "default_allow")
     reason = rule_result.get("reason", "No rules matched.")
+
+    # Apply current system context without weakening deterministic rules.
+    context_risk, context_reason = _apply_context_adjustment(
+        final_risk,
+        ast,
+        context
+    )
+
+    if context_risk != final_risk:
+        final_risk = context_risk
+        reason = f"{reason} Context: {context_reason}"
 
     # 4. Determine Policy Action
     if final_risk == "critical":
@@ -274,6 +338,7 @@ def fuse(raw_command: str, ast: dict | None = None) -> dict[str, Any]:
     return {
         "raw_command": raw_command,
         "ast": ast,
+        "context": context,
         "kb_entry": kb_entry,
         "semantic_matches": semantic_matches,
         "rule_result": rule_result,
