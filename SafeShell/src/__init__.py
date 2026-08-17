@@ -1,1 +1,0 @@
-"""SafeShell modular source package."""
