@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SafeShell Raw Linux Command Schema",
+  "description": "Schema for raw Linux/Bash command examples before parsing, semantic enrichment, context collection, and risk/intent labeling.",
+  "type": "object",
+
+  "required": [
+    "id",
+    "command",
+    "category",
+    "source"
+  ],
+
+  "properties": {
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Unique identifier for the command example."
+    },
+
+    "command": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Complete raw Linux/Bash command exactly as represented in the source example."
+    },
+
+    "category": {
+      "type": "string",
+      "enum": [
+        "filesystem",
+        "permissions",
+        "process",
+        "service",
+        "package",
+        "git",
+        "network",
+        "disk_storage",
+        "system",
+        "archive_compression",
+        "shell",
+        "user_account",
+        "security",
+        "text_processing",
+        "development",
+        "container",
+        "other"
+      ],
+      "description": "Broad functional category of the command."
+    },
+
+    "subcategory": {
+      "type": "string",
+      "minLength": 1,
+      "description": "More specific operation performed by the command."
+    },
+
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Command/program names appearing in the command. Useful for pipelines and chained commands."
+    },
+
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Options or flags appearing in the command."
+    },
+
+    "arguments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arguments, paths, values, patterns, filenames, or other operands supplied to commands."
+    },
+
+    "operators": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "|",
+          "||",
+          "&&",
+          ";",
+          "&",
+          ";;",
+          "&>",
+          "|&"
+        ]
+      },
+      "description": "Shell operators present in the command."
+    },
+
+    "redirections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          ">",
+          ">>",
+          "<",
+          "<<",
+          "<<<",
+          "2>",
+          "2>>",
+          "2>&1",
+          "&>",
+          "&>>"
+        ]
+      },
+      "description": "Input/output redirection operators present in the command."
+    },
+
+    "has_sudo": {
+      "type": "boolean",
+      "description": "Whether sudo appears in the command."
+    },
+
+    "has_pipe": {
+      "type": "boolean",
+      "description": "Whether the command contains a pipeline."
+    },
+
+    "has_redirection": {
+      "type": "boolean",
+      "description": "Whether the command contains input/output redirection."
+    },
+
+    "has_chaining": {
+      "type": "boolean",
+      "description": "Whether multiple commands are chained using shell operators."
+    },
+
+    "has_command_substitution": {
+      "type": "boolean",
+      "description": "Whether command substitution such as $(command) or backticks is present."
+    },
+
+    "has_variable_assignment": {
+      "type": "boolean",
+      "description": "Whether the command contains shell variable assignments."
+    },
+
+    "has_glob": {
+      "type": "boolean",
+      "description": "Whether wildcard/glob patterns such as *, ?, or [] are present."
+    },
+
+    "has_shell_expansion": {
+      "type": "boolean",
+      "description": "Whether shell expansion constructs are present."
+    },
+
+    "has_quotes": {
+      "type": "boolean",
+      "description": "Whether quoted strings are present."
+    },
+
+    "has_subshell": {
+      "type": "boolean",
+      "description": "Whether a subshell construct such as (...) is present."
+    },
+
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "foreground",
+        "background",
+        "unknown"
+      ],
+      "description": "Whether the command is intended to execute in the foreground or background."
+    },
+
+    "target_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "file",
+          "directory",
+          "filesystem",
+          "process",
+          "service",
+          "package",
+          "user",
+          "group",
+          "network",
+          "device",
+          "archive",
+          "repository",
+          "system",
+          "unknown"
+        ]
+      },
+      "description": "Types of resources explicitly targeted by the command, when identifiable from the command itself."
+    },
+
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File or directory paths explicitly present in the command."
+    },
+
+    "environment_variables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Environment variables referenced or assigned in the command."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of what the command is intended to do."
+    },
+
+    "source": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "tldr",
+            "mitre",
+            "gtfobins",
+            "manual",
+            "documentation",
+            "synthetic",
+            "other"
+          ],
+          "description": "Origin of the command example."
+        },
+
+        "name": {
+          "type": "string",
+          "description": "Name of the source, dataset, documentation, or contributor."
+        },
+
+        "reference": {
+          "type": "string",
+          "description": "Source reference, URL, document identifier, or other provenance information."
+        },
+
+        "license": {
+          "type": "string",
+          "description": "License information associated with the source, when known."
+        }
+      },
+
+      "additionalProperties": false
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional descriptive tags such as destructive, privileged, network, recursive, or administrative."
+    }
+  },
+
+  "additionalProperties": false
+}
