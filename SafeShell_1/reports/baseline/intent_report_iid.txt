@@ -1,0 +1,42 @@
+                    precision    recall  f1-score   support
+
+           archive       0.80      1.00      0.89         4
+           compare       0.00      0.00      0.00         1
+         configure       1.00      0.25      0.40         4
+           connect       1.00      1.00      1.00         9
+              copy       1.00      0.97      0.98        33
+            create       1.00      1.00      1.00        12
+            delete       0.97      0.94      0.95        32
+           execute       0.99      0.93      0.96       103
+           extract       0.99      0.99      0.99        96
+            filter       1.00      1.00      1.00        51
+           inspect       0.98      0.99      0.99       465
+           install       1.00      1.00      1.00        14
+              list       1.00      0.98      0.99        51
+      manage_cloud       1.00      1.00      1.00         7
+  manage_container       0.98      0.98      0.98        50
+   manage_database       1.00      1.00      1.00         7
+   manage_identity       0.80      1.00      0.89         8
+    manage_network       1.00      0.96      0.98        26
+    manage_package       0.78      1.00      0.88         7
+manage_permissions       1.00      1.00      1.00        64
+    manage_process       1.00      0.91      0.95        11
+    manage_service       1.00      1.00      1.00        10
+            modify       0.90      1.00      0.95         9
+              move       1.00      1.00      1.00        26
+   network_request       1.00      1.00      1.00        26
+            output       1.00      0.98      0.99        83
+              read       1.00      0.99      1.00       141
+            search       1.00      1.00      1.00       414
+security_operation       1.00      0.82      0.90        11
+     shell_control       0.97      0.95      0.96        82
+              sort       1.00      1.00      1.00        98
+          transfer       1.00      0.96      0.98        26
+         transform       1.00      0.96      0.98        56
+         uninstall       1.00      1.00      1.00         8
+   version_control       1.00      0.97      0.98        33
+
+         micro avg       0.99      0.98      0.99      2078
+         macro avg       0.95      0.93      0.93      2078
+      weighted avg       0.99      0.98      0.99      2078
+       samples avg       0.98      0.98      0.98      2078
