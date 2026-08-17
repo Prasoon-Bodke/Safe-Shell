@@ -16,11 +16,10 @@ Single command mode:
     python main.py "sudo rm -rf /etc"
 """
 
-import sys
-import semantic_fusion
-
 import os
 import sys
+
+import semantic_fusion
 
 # Ensure UTF-8 output encoding for Windows terminals
 if hasattr(sys.stdout, "reconfigure"):
