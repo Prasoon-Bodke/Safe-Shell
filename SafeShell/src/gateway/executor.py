@@ -2,16 +2,10 @@ import subprocess
 import sys
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-sys.path.append(os.path.join(BASE_DIR, "policy"))
-sys.path.append(os.path.join(BASE_DIR, "audit"))
-sys.path.append(os.path.join(BASE_DIR, "personalization"))
-
-from policy_engine import check_policy
-from audit_logger import log_command
-from user_profile import get_user_profile
-from safety_checker import final_safety_check
+from ..risk.policy_engine import check_policy
+from ..audit.audit_logger import log_command
+from ..trust.user_profile import get_user_profile
+from .safety_checker import final_safety_check
 
 
 def execute_command(command, role):
