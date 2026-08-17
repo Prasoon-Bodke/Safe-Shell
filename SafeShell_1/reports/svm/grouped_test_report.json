@@ -1,0 +1,306 @@
+{
+  "split": "grouped_test",
+  "records": 1522,
+  "intent": {
+    "micro_f1": 0.9992936190251942,
+    "macro_f1": 0.11388888888888889,
+    "weighted_f1": 0.9995352916535762,
+    "exact_match": 0.9980289093298291,
+    "hamming_loss": 5.631687629059508e-05,
+    "classification_report": {
+      "archive": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "compare": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "configure": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "connect": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "copy": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "create": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "delete": {
+        "precision": 0.9726027397260274,
+        "recall": 1.0,
+        "f1-score": 0.9861111111111112,
+        "support": 71.0
+      },
+      "execute": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 600.0
+      },
+      "extract": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "filter": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "inspect": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "install": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "list": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_cloud": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_container": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_database": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_identity": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_network": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_package": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_permissions": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_process": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "manage_service": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "modify": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "move": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "network_request": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "output": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "read": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "search": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 1437.0
+      },
+      "security_operation": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "shell_control": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "sort": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "transfer": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 14.0
+      },
+      "transform": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "uninstall": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "version_control": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "micro avg": {
+        "precision": 0.9985882352941177,
+        "recall": 1.0,
+        "f1-score": 0.9992936190251942,
+        "support": 2122.0
+      },
+      "macro avg": {
+        "precision": 0.11350293542074363,
+        "recall": 0.11428571428571428,
+        "f1-score": 0.11388888888888889,
+        "support": 2122.0
+      },
+      "weighted avg": {
+        "precision": 0.9990833150426711,
+        "recall": 1.0,
+        "f1-score": 0.9995352916535762,
+        "support": 2122.0
+      },
+      "samples avg": {
+        "precision": 0.9992334647393781,
+        "recall": 1.0,
+        "f1-score": 0.9995181778361805,
+        "support": 2122.0
+      }
+    }
+  },
+  "risk": {
+    "accuracy": 0.9993429697766097,
+    "macro_f1": 0.5987468573467447,
+    "weighted_f1": 0.9993411404053022,
+    "dangerous_to_safe_rate": 0.011363636363636364,
+    "dangerous_to_safe_count": 1,
+    "dangerous_count": 88,
+    "high_or_critical_to_safe_rate": 0.0,
+    "high_or_critical_to_safe_count": 0,
+    "high_or_critical_count": 3,
+    "critical_to_safe_rate": 0.0,
+    "critical_to_safe_count": 0,
+    "critical_count": 0,
+    "classification_report": {
+      "safe": {
+        "precision": 0.9993031358885017,
+        "recall": 1.0,
+        "f1-score": 0.9996514464970373,
+        "support": 1434.0
+      },
+      "low": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "medium": {
+        "precision": 1.0,
+        "recall": 0.9882352941176471,
+        "f1-score": 0.9940828402366864,
+        "support": 85.0
+      },
+      "high": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 3.0
+      },
+      "critical": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 0.0
+      },
+      "accuracy": 0.9993429697766097,
+      "macro avg": {
+        "precision": 0.5998606271777003,
+        "recall": 0.5976470588235294,
+        "f1-score": 0.5987468573467447,
+        "support": 1522.0
+      },
+      "weighted avg": {
+        "precision": 0.9993434276373925,
+        "recall": 0.9993429697766097,
+        "f1-score": 0.9993411404053022,
+        "support": 1522.0
+      }
+    }
+  }
+}
