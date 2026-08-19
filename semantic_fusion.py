@@ -209,7 +209,11 @@ def _apply_context_adjustment(
     Adjust risk based on the current system context.
 
     Existing deterministic rules remain the primary safety mechanism.
-    Context can only increase risk, never decrease it.
+    Context can only increase risk by ONE level, never decrease it,
+    and never on sudo alone -- sudo just means elevated privilege,
+    not automatically high risk. `sudo apt update` stays low/medium;
+    `sudo rm -rf /` was already high/critical from the rules engine
+    before context even runs.
     """
 
     target_path = ast.get("target_path", "")
@@ -218,6 +222,7 @@ def _apply_context_adjustment(
     current_index = risk_levels.index(risk)
 
     context_reasons = []
+    escalate = False
 
     # Check whether the target path exists in the current filesystem.
     filesystem = context.get("filesystem", {})
@@ -229,16 +234,21 @@ def _apply_context_adjustment(
             context_reasons.append(
                 f"Target path '{target_path}' appears in the current filesystem context."
             )
+            escalate = True
 
-    # Privileged commands receive additional scrutiny.
+    # Privileged commands get a NOTE, not an automatic escalation.
+    # sudo only matters combined with an already-risky base verdict.
     if ast.get("is_sudo"):
         context_reasons.append(
             "Command is being executed with elevated privileges."
         )
+        if current_index >= risk_levels.index("medium"):
+            escalate = True
 
-    # Never reduce an existing risk level.
-    if context_reasons and current_index < risk_levels.index("high"):
-        risk = "high"
+    # Escalate by exactly one level, never jump straight to "high"/"critical",
+    # and never past "critical".
+    if escalate and current_index < len(risk_levels) - 1:
+        risk = risk_levels[current_index + 1]
 
     if context_reasons:
         reason = " ".join(context_reasons)
@@ -246,7 +256,6 @@ def _apply_context_adjustment(
         reason = ""
 
     return risk, reason
-
 
 # ---------------------------------------------------------------------------
 # Core Fusion Function

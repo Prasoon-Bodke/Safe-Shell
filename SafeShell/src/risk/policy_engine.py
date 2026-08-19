@@ -12,7 +12,6 @@ LOW_RISK_COMMANDS = [
 
 HIGH_RISK_COMMANDS = [
     "rm",
-    "sudo",
     "chmod",
     "chown",
     "shutdown",
