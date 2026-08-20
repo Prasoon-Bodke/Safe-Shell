@@ -33,3 +33,28 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Logs and databases
+*.log
+*.db
+*.sqlite
+
+# Environment / secrets
+.env
+*.env
+
+# FAISS generated index (rebuild from KB)
+faiss_index.bin
+faiss_id_map.pkl
+
+# Temp / scratch
+*.tmp
+*.bak
+
+
+# Test & coverage caches
+.pytest_cache/
+.coverage
+htmlcov/

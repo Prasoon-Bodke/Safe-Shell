@@ -117,11 +117,53 @@ def interactive_loop():
             break
 
 
+import shlex
+import subprocess
+
+def execute_cmd(result: dict) -> None:
+    """Safely execute the command based on the SafeShell policy action."""
+    action = result["action"]
+    cmd = result["raw_command"]
+    
+    if action == "BLOCK":
+        print(f"{COLOR_BOLD}{COLOR_RED}SafeShell Policy: Command execution BLOCKED.{COLOR_RESET}")
+        return
+        
+    if action == "WARN":
+        try:
+            confirm = input(f"{COLOR_BOLD}{COLOR_YELLOW}Proceed with execution? (yes/no): {COLOR_RESET}").strip().lower()
+        except (KeyboardInterrupt, EOFError):
+            print("\nCancelled.")
+            return
+        if confirm != "yes":
+            print("Execution cancelled by user.")
+            return
+            
+    print(f"\n{COLOR_CYAN}SafeShell: Executing command...{COLOR_RESET}\n")
+    try:
+        # If shell chaining/redirection operators are present, execute via shell=True safely
+        if any(op in cmd for op in ("|", "&&", "||", ";", ">", "<")):
+            subprocess.run(cmd, shell=True)
+        else:
+            subprocess.run(shlex.split(cmd))
+    except Exception as e:
+        print(f"Execution failed: {e}")
+
+
 def main():
-    if len(sys.argv) > 1:
-        raw_cmd = " ".join(sys.argv[1:])
+    args = sys.argv[1:]
+    execute_mode = False
+    
+    if args and args[0] in ("-e", "--execute"):
+        execute_mode = True
+        args = args[1:]
+        
+    if args:
+        raw_cmd = " ".join(args)
         result = semantic_fusion.fuse(raw_cmd)
         print_analysis(result)
+        if execute_mode:
+            execute_cmd(result)
     else:
         interactive_loop()
 

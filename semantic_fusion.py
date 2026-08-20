@@ -328,12 +328,9 @@ def fuse(raw_command: str, ast: dict | None = None) -> dict[str, Any]:
         reason = f"{reason} Context: {context_reason}"
 
     # 4. Determine Policy Action
-    if final_risk == "critical":
+    if final_risk in ("high", "critical"):
         action = "BLOCK"
-        explanation = f"CRITICAL SECURITY RISK: {reason}"
-    elif final_risk == "high":
-        action = "WARN_CONFIRM"
-        explanation = f"HIGH RISK OPERATION: {reason}"
+        explanation = f"{final_risk.upper()} SECURITY RISK: {reason}"
     elif final_risk == "medium":
         action = "WARN"
         explanation = f"POTENTIAL RISK: {reason}"
